@@ -25,7 +25,7 @@ class WPLMS_Application_Forms_Init{
 	private function __construct(){
 
 		add_filter('wplms_course_product_metabox',array($this,'add_wplms_application_forms_in_course'),99,1);
-		add_filter('wplms_course_details_widget',array($this,'add_wplms_application_form_on_course_details'),99,2);
+		add_filter('wplms_take_course_button_html',array($this,'add_wplms_application_form_on_course_details'),99,2);
 
 	} // END public function __construct
 
@@ -57,6 +57,25 @@ class WPLMS_Application_Forms_Init{
 								'desc'=> __('Application form shown to the users before applying for the course.','wplms-af' ),
 							);
 		return $metabox;
+	}
+
+	function add_wplms_application_form_on_course_details( $course_details,$course_id ){
+		$check = get_post_meta($course_id,'vibe_course_apply',true);
+		if( vibe_validate($check) ){
+			$user_id = get_current_user_id();
+			$check_apply = get_user_meta($user_id,'apply_course'.$course_id,true);
+
+			if( empty($check_apply) ){
+				$check_apply_form = get_post_meta($course_id,'vibe_wplms_application_forms',true);
+				if( vibe_validate($check_apply_form) ){
+					$check_apply_content = get_post_meta($course_id,'vibe_wplms_application_forms_editor',true);
+					if( !empty($check_apply_content) ){
+						echo do_shortcode($check_apply_content);
+					}
+				}
+			}
+		}
+		return $course_details;
 	}
 	
 } // END class WPLMS_Application_Forms_Init
