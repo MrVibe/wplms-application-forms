@@ -27,6 +27,7 @@ class WPLMS_Application_Forms_Init{
 		add_filter('wplms_course_product_metabox',array($this,'add_wplms_application_forms_in_course'),99,1);
 		add_filter('wplms_take_course_button_html',array($this,'add_wplms_application_form_on_course_details'),99,2);
 		add_action('wp_ajax_submit_course_aaplication_form',array($this,'submit_course_aaplication_form'));
+		add_action('wplms_course_application_submission_users',array($this,'wplms_show_user_application_form'),10,2);
 
 	} // END public function __construct
 
@@ -98,7 +99,7 @@ class WPLMS_Application_Forms_Init{
 					if( $this.hasClass('disabled') ){
 						return;
 					}
-
+return;
 					var parent = $('.course_aaplication_form').find('form');
 					var $response= parent.find(".response");
 					var error = '';
@@ -198,8 +199,16 @@ class WPLMS_Application_Forms_Init{
         	$message .= __('uploaded Attachment','wplms-af').' : '.$attachment_url.' <br />';
         }
         $user_id = get_current_user_id();
-        update_user_meta($user_id,'wplms_course_application_form',$message);
+        $course_id = get_the_ID();
+        update_user_meta($user_id,'wplms_course_application_form_'.$course_id,$message);
         die();
+	}
+
+	function wplms_show_user_application_form($user_id,$course_id){
+		$application_form = get_user_meta($user_id,'wplms_course_application_form_'.$course_id,true);
+		if( !empty($application_form) ){
+            echo '<span class="user_application_form">'.$application_form.'</span>';
+        }
 	}
 	
 } // END class WPLMS_Application_Forms_Init
