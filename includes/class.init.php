@@ -26,6 +26,7 @@ class WPLMS_Application_Forms_Init{
 
 		add_filter('wplms_course_product_metabox',array($this,'add_wplms_application_forms_in_course'),99,1);
 		add_filter('wplms_take_course_button_html',array($this,'add_wplms_application_form_on_course_details'),99,2);
+		add_action('wp_ajax_submit_course_aaplication_form',array($this,'submit_course_aaplication_form'));
 
 	} // END public function __construct
 
@@ -100,10 +101,11 @@ class WPLMS_Application_Forms_Init{
 
 					var parent = $('.course_aaplication_form').find('form');
 					var $response= parent.find(".response");
-					var error= '';
-					var data = [];
+					var error = '';
+					var data  = [];
 					var label = [];
 					var regex = [];
+					var event = parent.attr('data-event');
 					regex['email'] = /^([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4}$)/i;
 					regex['phone'] = /[A-Z0-9]{7}|[A-Z0-9][A-Z0-9-]{7}/i;
 					regex['numeric'] = /^[0-9]+$/i;
@@ -158,6 +160,8 @@ class WPLMS_Application_Forms_Init{
 											isocharset:isocharset,
 											label:JSON.stringify(labels),
 											data:JSON.stringify(formdata),
+											event:event,
+											attachment_id:attachment_id,
 										},
 									cache: false,
 									success: function (html) {
@@ -170,6 +174,32 @@ class WPLMS_Application_Forms_Init{
 			});
 		</script>
 		<?php
+	}
+
+	function submit_course_aaplication_form(){
+		$nonce = $_POST['security'];
+		$event = $_POST['event'];
+		if ( ! wp_verify_nonce( $nonce, 'vibeform_security'.$event )){
+			echo __("Security check failed, please contact administrator","wplms-af");
+			die();
+		}
+
+		$data = json_decode(stripslashes($_POST['data']));
+		$labels = json_decode(stripslashes($_POST['label']));
+
+		$message = '';
+		for($i=1;$i<count($data);$i++){
+            $message .= $labels[$i].' : '.$data[$i].' <br />';
+        }
+
+        if( isset($_POST['attachment_id']) && is_numeric($_POST['attachment_id']) ){
+        	$attachment_id = $_POST['attachment_id'];
+        	$attachment_url = wp_get_attachment_url($attachment_id);
+        	$message .= __('uploaded Attachment','wplms-af').' : '.$attachment_url.' <br />';
+        }
+        $user_id = get_current_user_id();
+        update_user_meta($user_id,'wplms_course_application_form',$message);
+        die();
 	}
 	
 } // END class WPLMS_Application_Forms_Init
