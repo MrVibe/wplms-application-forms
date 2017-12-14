@@ -99,7 +99,7 @@ class WPLMS_Application_Forms_Init{
 					if( $this.hasClass('disabled') ){
 						return;
 					}
-return;
+
 					var parent = $('.course_aaplication_form').find('form');
 					var $response= parent.find(".response");
 					var error = '';
@@ -144,6 +144,7 @@ return;
 					});
 
 					var attachment_id = $('.course_aaplication_form').find('.attachment_ids').val();
+					attachment_id = parseInt(attachment_id);
 					if( typeof(attachment_id) == 'number' ){
 						attachment[0] = parent.find('.form_upload_label').text();
 						attachment[1] = attachment_id;
@@ -164,8 +165,9 @@ return;
 									data: { action: 'submit_course_aaplication_form',
 											security: $response.attr('data-security'),
 											isocharset:isocharset,
-											label:JSON.stringify(labels),
-											data:JSON.stringify(formdata),
+											label:JSON.stringify(label),
+											data:JSON.stringify(data),
+											course_id:$this.attr('data-id'),
 											event:event,
 											attachment:attachment,
 										},
@@ -185,7 +187,7 @@ return;
 	function submit_course_aaplication_form(){
 		$nonce = $_POST['security'];
 		$event = $_POST['event'];
-		if ( ! wp_verify_nonce( $nonce, 'vibeform_security'.$event )){
+		if ( ! wp_verify_nonce( $nonce, 'vibeform_security'.$event ) || empty($_POST['course_id']) ){
 			echo __("Security check failed, please contact administrator","wplms-af");
 			die();
 		}
@@ -199,12 +201,12 @@ return;
 		}
 
 		if( isset($_POST['attachment']) && !empty($_POST['attachment']) ){
-			$attachment = $_POST['attachment_id'];
+			$attachment = $_POST['attachment'];
 			$attachment_url = wp_get_attachment_url($attachment[1]);
 			$message .= $attachment[0].' : '.$attachment_url.' <br />';
 		}
 		$user_id = get_current_user_id();
-		$course_id = get_the_ID();
+		$course_id = $_POST['course_id'];
 		update_user_meta($user_id,'wplms_course_application_form_'.$course_id,$message);
 		die();
 	}
