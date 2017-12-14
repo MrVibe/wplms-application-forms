@@ -106,6 +106,7 @@ return;
 					var data  = [];
 					var label = [];
 					var regex = [];
+					var attachment = [];
 					var event = parent.attr('data-event');
 					regex['email'] = /^([a-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4}$)/i;
 					regex['phone'] = /[A-Z0-9]{7}|[A-Z0-9][A-Z0-9-]{7}/i;
@@ -143,6 +144,10 @@ return;
 					});
 
 					var attachment_id = $('.course_aaplication_form').find('.attachment_ids').val();
+					if( typeof(attachment_id) == 'number' ){
+						attachment[0] = parent.find('.form_upload_label').text();
+						attachment[1] = attachment_id;
+					}
 
 					if (error !== "") {
 						$response.fadeIn("slow");
@@ -162,7 +167,7 @@ return;
 											label:JSON.stringify(labels),
 											data:JSON.stringify(formdata),
 											event:event,
-											attachment_id:attachment_id,
+											attachment:attachment,
 										},
 									cache: false,
 									success: function (html) {
@@ -190,25 +195,25 @@ return;
 
 		$message = '';
 		for($i=1;$i<count($data);$i++){
-            $message .= $labels[$i].' : '.$data[$i].' <br />';
-        }
+			$message .= $labels[$i].' : '.$data[$i].' <br />';
+		}
 
-        if( isset($_POST['attachment_id']) && is_numeric($_POST['attachment_id']) ){
-        	$attachment_id = $_POST['attachment_id'];
-        	$attachment_url = wp_get_attachment_url($attachment_id);
-        	$message .= __('uploaded Attachment','wplms-af').' : '.$attachment_url.' <br />';
-        }
-        $user_id = get_current_user_id();
-        $course_id = get_the_ID();
-        update_user_meta($user_id,'wplms_course_application_form_'.$course_id,$message);
-        die();
+		if( isset($_POST['attachment']) && !empty($_POST['attachment']) ){
+			$attachment = $_POST['attachment_id'];
+			$attachment_url = wp_get_attachment_url($attachment[1]);
+			$message .= $attachment[0].' : '.$attachment_url.' <br />';
+		}
+		$user_id = get_current_user_id();
+		$course_id = get_the_ID();
+		update_user_meta($user_id,'wplms_course_application_form_'.$course_id,$message);
+		die();
 	}
 
 	function wplms_show_user_application_form($user_id,$course_id){
 		$application_form = get_user_meta($user_id,'wplms_course_application_form_'.$course_id,true);
 		if( !empty($application_form) ){
-            echo '<span class="user_application_form">'.$application_form.'</span>';
-        }
+			echo '<span class="user_application_form">'.$application_form.'</span>';
+		}
 	}
 	
 } // END class WPLMS_Application_Forms_Init
