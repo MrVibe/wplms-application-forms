@@ -195,16 +195,21 @@ class WPLMS_Application_Forms_Init{
 		$data = json_decode(stripslashes($_POST['data']));
 		$labels = json_decode(stripslashes($_POST['label']));
 
-		$message = '';
+		$message = '<ul>';
 		for($i=1;$i<count($data);$i++){
-			$message .= $labels[$i].' : '.$data[$i].' <br />';
+			$message .= '<li>';
+			$message .= $labels[$i].' : '.$data[$i];
+			$message .= '</li>';
 		}
 
 		if( isset($_POST['attachment']) && !empty($_POST['attachment']) ){
 			$attachment = $_POST['attachment'];
 			$attachment_url = wp_get_attachment_url($attachment[1]);
-			$message .= $attachment[0].' : '.$attachment_url.' <br />';
+			$message .= '<li>';
+			$message .= $attachment[0].' : '.$attachment_url;
+			$message .= '</li>';
 		}
+		$message .= '</ul>';
 		$user_id = get_current_user_id();
 		$course_id = $_POST['course_id'];
 		update_user_meta($user_id,'wplms_course_application_form_'.$course_id,$message);
@@ -214,7 +219,7 @@ class WPLMS_Application_Forms_Init{
 	function wplms_show_user_application_form($user_id,$course_id){
 		$application_form = get_user_meta($user_id,'wplms_course_application_form_'.$course_id,true);
 		if( !empty($application_form) ){
-			echo '<span class="user_application_form">'.$application_form.'</span>';
+			echo '<div class="user_application_form" style="width:400px;margin:auto;">'.$application_form.'</div>';
 		}
 	}
 	
