@@ -62,6 +62,9 @@ class WPLMS_Application_Forms_Init{
 	}
 
 	function add_wplms_application_form_on_course_details( $course_details,$course_id ){
+		if( !is_user_logged_in() ){
+			return $course_details;
+		}
 		$check = get_post_meta($course_id,'vibe_course_apply',true);
 		if( vibe_validate($check) ){
 			$user_id = get_current_user_id();
