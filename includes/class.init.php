@@ -25,7 +25,8 @@ class WPLMS_Application_Forms_Init{
 	private function __construct(){
 
 		add_filter('wplms_course_product_metabox',array($this,'add_wplms_application_forms_in_course'),99,1);
-		add_filter('wplms_take_course_button_html',array($this,'add_wplms_application_form_on_course_details'),99,2);
+		add_filter('wplms_take_this_course_button_label',array($this,'add_wplms_application_form_on_course_details'),99,2);
+		add_filter('wplms_private_course_button_label',array($this,'add_wplms_application_form_on_course_details'),99,2);
 		add_action('wp_ajax_submit_course_aaplication_form',array($this,'submit_course_aaplication_form'));
 		add_action('wplms_course_application_submission_users',array($this,'wplms_show_user_application_form'),10,2);
 
@@ -61,9 +62,9 @@ class WPLMS_Application_Forms_Init{
 		return $metabox;
 	}
 
-	function add_wplms_application_form_on_course_details( $course_details,$course_id ){
+	function add_wplms_application_form_on_course_details( $label,$course_id ){
 		if( !is_user_logged_in() ){
-			return $course_details;
+			return $label;
 		}
 		$check = get_post_meta($course_id,'vibe_course_apply',true);
 		if( vibe_validate($check) ){
@@ -83,7 +84,7 @@ class WPLMS_Application_Forms_Init{
 				}
 			}
 		}
-		return $course_details;
+		return $label;
 	}
 
 	function add_script_for_apply_for_course_button(){
