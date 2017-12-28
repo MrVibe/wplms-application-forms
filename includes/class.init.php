@@ -2,7 +2,7 @@
 /**
  *
  * @class       WPLMS_Application_Forms_Init
- * @author      VibeThemes (H.K.Latiyan)
+ * @author      VibeThemes (H.K.)
  * @category    Admin
  * @package     WPLMS-Application-Forms/includes
  * @version     1.0
