@@ -1,0 +1,90 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: WPLMS Application Forms\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-05 13:10+0530\n"
+"PO-Revision-Date: 2017-11-22 18:10+0530\n"
+"Last-Translator: vibethemes@gmail.com <vibethemes@gmail.com>\n"
+"Language-Team: vibethemes <vibethemes@gmail.com>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 2.0.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class.config.php:117
+msgid "Unable to contact server"
+msgstr ""
+
+#: includes/class.init.php:38
+msgid "Hide"
+msgstr ""
+
+#: includes/class.init.php:38
+msgid "Show"
+msgstr ""
+
+#: includes/class.init.php:41 includes/class.init.php:42
+msgid "Invite Application Form"
+msgstr ""
+
+#: includes/class.init.php:45
+msgid "DISABLE"
+msgstr ""
+
+#: includes/class.init.php:45
+msgid "ENABLE"
+msgstr ""
+
+#: includes/class.init.php:50
+msgid ""
+"Show application form to the users to get their information before applying "
+"for the course."
+msgstr ""
+
+#: includes/class.init.php:53
+msgid "Application Form"
+msgstr ""
+
+#: includes/class.init.php:54
+msgid "Add Application Form"
+msgstr ""
+
+#: includes/class.init.php:60
+msgid "Application form shown to the users before applying for the course."
+msgstr ""
+
+#: includes/class.init.php:195
+msgid "Security check failed, please contact administrator"
+msgstr ""
+
+#: includes/class.updater.php:177
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
+msgstr ""
+
+#: includes/class.updater.php:184
+#, php-format
+msgid ""
+"There is a new version of %1$s available. <a target=\"_blank\" class="
+"\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s"
+"\">update now</a>."
+msgstr ""
+
+#: includes/class.updater.php:324
+msgid "You do not have permission to install plugin updates"
+msgstr ""
+
+#: includes/class.updater.php:324
+msgid "Error"
+msgstr ""
