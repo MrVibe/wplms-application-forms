@@ -12,13 +12,6 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
- 
-if( !defined('VIBE_PLUGIN_URL')){
-    define('VIBE_PLUGIN_URL',plugins_url());
-}
-if( !defined('WPLMS_URL')){
-	define( 'WPLMS_URL', 'http://wplms.io' ); 
-}
 
 class Wplms_Application_Forms_Update{
 
