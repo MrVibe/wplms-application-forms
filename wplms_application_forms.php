@@ -45,7 +45,7 @@ register_activation_hook(__FILE__,'flush_rewrite_rules');
 
 function Wplms_Application_Forms_Plugin_updater() {
     $license_key = trim( get_option( 'wplms_application_forms_license_key' ) );
-    $edd_updater = new Wplms_Application_Forms_Plugin_Updater( 'http://vibethemes.com', __FILE__, array(
+    $edd_updater = new Wplms_Application_Forms_Plugin_Updater( 'http://wplms.io', __FILE__, array(
             'version'   => '1.0',               
             'license'   => $license_key,        
             'item_name' => 'WPLMS APPLICATION FORMS',    

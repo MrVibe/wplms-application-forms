@@ -16,8 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 if( !defined('VIBE_PLUGIN_URL')){
     define('VIBE_PLUGIN_URL',plugins_url());
 }
-if( !defined('VIBETHEMES_URL')){
-	define( 'VIBETHEMES_URL', 'http://vibethemes.com' ); 
+if( !defined('WPLMS_URL')){
+	define( 'WPLMS_URL', 'http://wplms.io' ); 
 }
 
 class Wplms_Application_Forms_Update{
@@ -110,7 +110,7 @@ class Wplms_Application_Forms_Update{
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( VIBETHEMES_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( WPLMS_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) ){
@@ -159,7 +159,7 @@ class Wplms_Application_Forms_Update{
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( VIBETHEMES_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( WPLMS_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 		// make sure the response came back okay
 		if ( is_wp_error( $response ) )
@@ -203,7 +203,7 @@ class Wplms_Application_Forms_Update{
 		);
 
 		// Call the custom API.
-		$response = wp_remote_post( VIBETHEMES_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
+		$response = wp_remote_post( WPLMS_URL, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 
 
 		if ( is_wp_error( $response ) )

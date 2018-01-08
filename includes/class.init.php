@@ -101,6 +101,7 @@ class WPLMS_Application_Forms_Init{
 					}
 
 					if( $this.hasClass('disabled') ){
+						$('#apply_course_button').off('click');
 						return;
 					}
 
