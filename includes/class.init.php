@@ -33,10 +33,15 @@ class WPLMS_Application_Forms_Init{
 	} // END public function __construct
 
 	function add_wplms_application_forms_in_course( $metabox ){
-		$metabox['vibe_course_apply']['type'] = 'conditionalswitch';
-		$metabox['vibe_course_apply']['hide_nodes'] = array('vibe_wplms_application_forms','vibe_wplms_application_forms_editor');
-		$metabox['vibe_course_apply']['options'] = array('H'=>__('Hide','wplms-af' ),'S'=>__('Show','wplms-af' ));
 
+		if(!is_admin()){
+			$metabox['vibe_course_apply']['type'] = 'conditionalswitch';
+			$metabox['vibe_course_apply']['hide_nodes'] = array('vibe_wplms_application_forms','vibe_wplms_application_forms_editor');
+			$metabox['vibe_course_apply']['options'] = array('H'=>__('Hide','wplms-af' ),'S'=>__('Show','wplms-af' ));
+	
+		}
+
+		
 		$metabox['vibe_wplms_application_forms'] = array(
 								'label'=> __('Invite Application Form','wplms-af' ),
 								'text'=>__('Invite Application Form','wplms-af' ),
