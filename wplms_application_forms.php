@@ -3,8 +3,8 @@
 Plugin Name: WPLMS Application Forms
 Plugin URI: http://www.Vibethemes.com
 Description: A WPLMS Addon to get details of the user while applying for a course.
-Version: 1.0
-Author: Vibethemes (H.K.)
+Version: 1.1
+Author: Vibethemes 
 Author URI: http://www.vibethemes.com
 Text Domain: wplms-af
 */
@@ -50,7 +50,7 @@ register_activation_hook(__FILE__,'flush_rewrite_rules');
 function Wplms_Application_Forms_Plugin_updater() {
     $license_key = trim( get_option( 'wplms_application_forms_license_key' ) );
     $edd_updater = new Wplms_Application_Forms_Plugin_Updater( WPLMS_URL, __FILE__, array(
-            'version'   => '1.0',               
+            'version'   => '1.1',               
             'license'   => $license_key,        
             'item_name' => 'WPLMS APPLICATION FORMS',    
             'author'    => 'VibeThemes' 
